@@ -1,12 +1,34 @@
-version: '2.1'
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+
 orbs:
+  node: circleci/node@4.1
   win: circleci/windows@5.0
+  jira: circleci/jira@1.3.1
+defaults: &defaults
+  resource_class: large
+
 jobs:
-  build:
-    executor: win/server-2022
+  Help-Get-LastestCode:
+    executor:
+      name: win/server-2022
+      size: large
+      shell: bash.exe
+    working_directory: ~/CircleCI_config_test
     steps:
-      - run: 'Write-Host ''Hello, Windows'''
+      - checkout:
+          path: ~/CircleCI_config_test
+      - run:
+          name: "Do Application according to some given configuration"
+          command: dir
+
 workflows:
-  my-workflow:
+      
+  # Below is the definition of your workflow.
+  # Inside the workflow, you provide the jobs you want to run
+  # CircleCI will run this workflow on every commit.
+  # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
+  Help-build-and-test-all:
     jobs:
-      - build
+      - Help-Get-LastestCode
