@@ -17,11 +17,29 @@ jobs:
       shell: bash.exe
     working_directory: ~/CircleCI_config_test
     steps:
+      - run: echo "===Start Buiding==="
       - checkout:
           path: ~/CircleCI_config_test
       - run:
           name: "Do Application according to some given configuration"
           command: dir
+  Help-Deploy:
+    executor:
+      name: win/server-2022
+      size: large
+      shell: bash.exe
+    working_directory: ~/CircleCI_config_test
+    steps:
+      - run: echo "===Start Deploying==="
+      - checkout:
+          path: ~/CircleCI_config_test
+      - run:
+          name: "Do Application according to some given configuration"
+          command: 
+          Import-Module IISAdministration
+          Import-Module WebAdministration
+          Set-ItemProperty -Path IIS:\AppPools\DefaultAppPool -Name "processModel.loadUserProfile" -Value true
+
 
 workflows:
       
