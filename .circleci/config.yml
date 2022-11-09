@@ -35,10 +35,7 @@ jobs:
           path: ~/CircleCI_config_test
       - run:
           name: "Do Application according to some given configuration"
-          command: 
-          Import-Module IISAdministration
-          Import-Module WebAdministration
-          Set-ItemProperty -Path IIS:\AppPools\DefaultAppPool -Name "processModel.loadUserProfile" -Value true
+          command: dir
 
 
 workflows:
