@@ -47,3 +47,5 @@ workflows:
   Help-build-and-test-all:
     jobs:
       - Help-Get-LastestCode
+
+      - Help-Deploy
